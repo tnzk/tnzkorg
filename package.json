@@ -1,0 +1,25 @@
+{
+  "name": "tnzkorg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tnzk/tnzkorg.git"
+  },
+  "author": "tnzk",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tnzk/tnzkorg/issues"
+  },
+  "homepage": "https://github.com/tnzk/tnzkorg#readme",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^0.23.3"
+  }
+}
