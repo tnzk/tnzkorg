@@ -22,7 +22,7 @@ inlineSVG: true
 
 ---
 
-# Puppeteer は難しい？
+## Puppeteer は難しい？
 
 2つの意味で難しい
 
@@ -299,59 +299,206 @@ p.then((value)=>{ console.log(value) })
 - 普通のプログラムは、書いたコードを実行したら、すべて手元で動作する
 - Puppeteer では、手元のNode.jsが実行する箇所と、裏で起動してるHeadless Chromeが実行する箇所が混在する
 
+---
+
+## 例えばこんなコードで
+
 ```js
 let query = 'What is a life, seriously?';
-await page.type('.top_searchbox__text', query);
-await page.click('.top_searchbox__submit');
-await page.waitForSelector('.result_products__line_wrap > .product_list .product_list__name', { visible: true });
+await page.type('#search', query);
+await page.click('#submit');
+await page.waitForSelector('#response', { visible: true });
 let n = await page.evaluate(() => {
-  let itemNames = [...document.querySelectorAll('.result_products__line_wrap > .product_list  .product_list__name')].map(e => e.innerHTML);
+  let itemNames = [...
+    document.querySelectorAll('#response')
+  ].map(e => e.innerHTML);
   return itemNames;
 });
 console.log(n);
 ```
----
-
-（図でNode実行箇所とChromium実行箇所を示す）
 
 ---
 
-## 実行コンテキストの図解
-
-- このような状況を「実行コンテキスト」が違うとか言ったりする
-- evaluate 関数に渡された関数は、Nodeから背後のChromiumに注入される
-- Chromium は、注入されたコードを開いているページのコンテキストで実行する
-- なので、API経由で（要検証）プロセス間での通信が実行されている
+![bg contain](images/001.png)
 
 ---
 
-図解
+![bg contain](images/002.png)
 
 ---
 
-## コンテキストとは
-同じ関数でもコンテキストが異なれば別の結果になる
+## 実行の流れ
 
-- クラスの2つのインスタンスを例にとってみる
-- この例は結果が変わるだけだが、エラーになる場合もある
+- `evaluate` 関数に渡された関数は、Nodeを経由して、背後のChromiumに注入される
+  - `Function.ToString` して文字列化して、 DevTools API の `Runtime.evaluate` で送り込んでいる
+- Chromium は、注入されたコードを、開いているページの中で実行する
+- このような状況を**実行コンテキストが違う**と言ったりする
+
+---
+
+![bg contain](images/003.webp)
+
+---
+
+## 普通、コンテキストは1つ
+
+- プログラムは、基本的に一つの言語で書く
+- サーバサイドやバックエンドで言語が違うときは、ファイルを分けるのが普通
+- 1つのファイルに複数の言語が混在することはあまりない
+  - 例外: インラインアセンブラ, JSX
+
+---
+
+## コンテキストの例
+
+- 同じ関数でもコンテキストが異なれば別の結果になる
+- 状態の抽象化
+
+---
+
+```js
+class C {
+  f() { return 2; }
+  g(s) { return eval(s)() }
+}
+class D {
+  f() { return 3; }
+  g(s) { return eval(s)() }
+}
+
+let s = '() => this.f()';
+let c = new C();
+let d = new D();
+
+c.g(s); //=> 2
+d.g(s); //=> 3
+```
 
 ---
 
 ## コンテキストの違いでエラーになる例
 
-- デバイスの状態: 物理的な要素が絡むもの
+```js
+class C {
+  f() { return 2; }
+  g(s) { return eval(s)() }
+}
+class D {
+  noF() { return 3; }
+  g(s) { return eval(s)() }
+}
+
+let s = '() => this.f()';
+let c = new C();
+let d = new D();
+
+c.g(s); //=> 2
+d.g(s); //=> Uncaught TypeError: this.f is not a function
+```
+
+---
+
+## なぜエラーになったのか？
+
+- `C#g()` と `D#g()` に渡した関数（を表す文字列）にはそれぞれ `f()` の呼び出しが含まれている
+- クラス `C` にはあるが、 `D` にはない
+- なので、 `eval` した時点でエラーになった
+- `this.f()` は、 `C` のコンテキストにはあるが、 `D` のコンテキストにはない
 
 ---
 
 ## 「Webページ」という実行コンテキスト
 
 - 処理系も違うし、ランタイムAPIも違う
-- `window` みたいなものはNodeにはない
-- 逆に `fs` モジュールみたいなものは Chromium にはない
-- そういう機能を使っちゃうとエラーになる
+- 動作しているプロセスも違う
+- なので、青色の部分から、黄色の部分の変数にアクセスすることもできない。アクセスしょうとするとエラーになる
 
 ---
 
-- https://github.com/puppeteer/puppeteer/blob/main/src/common/ExecutionContext.ts#L278
-Search "evaluate<T" で関数を文字列化して送信していることがわかる
-- devtools の Runtime.evaluate を実行してる
+```js
+let query = 'What is a life, seriously?';
+let n = await page.evaluate(() => {
+  alert(query); // <--- これはできない
+});
+```
+
+こうしたいときは、こうする:
+
+```js
+let query = 'What is a life, seriously?';
+let n = await page.evaluate((s) => {
+  alert(s)
+}, query);
+```
+こうすると、Puppeteerが関数と一緒に `query` もWebページの実行コンテキストに運んでいってくれる
+
+---
+
+## DOM要素の取得
+
+- `page.$(selector)` で取得したDOM要素も、DOM要素そのものではなく `ElementHandle` で包まれている
+- 取得したのはあくまで**Webページの実行コンテキスト**にあるオブジェクト
+- それを**Nodeの実行コンテキスト**で使おうとしていることを意識する
+- `ElementHandle`を介することによって、NodeとChromiumの間にあるややこしいアレコレをPuppeteerがよしなに片付けてくれる
+- その代わりPuppeteerのお作法に合わせてあげよう
+
+---
+
+## まとめ
+
+- Puppeteerはとても気軽に使えて便利
+- 一方で、手軽なわりに前提となるメンタルモデルは結構複雑で独特
+- 自分が今**Nodeで動くコードを書いているのか、Webページ上で動くコードを書いているのかを意識**することが大切
+- そしてコードがその**境界を跨ごうとしているときは要注意**。あるいは変なエラーが出たときは、境界を跨ごうとしていないか確認する
+  - 境界を跨ぐ方法は基本的に準備されているので安心してリファレンスを探そう
+
+---
+
+## おまけ
+
+[ExecutionContext#evaluate](https://github.com/puppeteer/puppeteer/blob/main/src/common/ExecutionContext.ts#L278)より。`Function.ToString()`してる…
+
+```js
+let functionText = pageFunction.toString();
+try {
+  new Function('(' + functionText + ')');
+  (snip)
+}
+let callFunctionOnPromise;
+try {
+  callFunctionOnPromise = this._client.send('Runtime.callFunctionOn', {
+    functionDeclaration: functionText + '\n' + suffix + '\n',
+    executionContextId: this._contextId,
+...
+```
+
+---
+
+![bg contain](images/003.webp)  
+
+<!-- 文化が違うなあと思った -->
+
+---
+
+- 前々から「どうやって送り込んでるんだろう？」とは思っていた
+- 昔、ソフトウェアドライバで既存のプログラムに実行コードを注入するような仕事をしてた
+- そのときは、あらかじめnasmで作ったバイト列を持っておいて、プログラムのロード時に割り込んで冒頭に差し込むようなことをしていた
+- ＜図でも入れてみる＞
+
+---
+
+- 決して「ソースコード」ではない。コンパイルされたバイト列。この時点で既にプログラムは「自分がソースコードだったとき」のことは覚えていない
+- なので、JSでも中間コードみたいなものを送り込むのだろうと想像していた
+- そしたら `ToString` だった。衝撃……
+- でも考えてみたらソースコードの状態のほうがポータブルなのは当然
+  - しかしVSCodeはなぜあれを解釈できるのか謎。そのうちちゃんと調べたい
+
+---
+
+# 画像の出典
+
+- https://commons.wikimedia.org/wiki/File:GNOME_Terminal_icon_2019.svg
+- https://commons.wikimedia.org/wiki/File:Chromium_(web_browser).png
+- https://alu.jp/series/%E3%83%92%E3%82%B9%E3%83%88%E3%83%AA%E3%82%A8/crop/DadKPetAw3VZt3wswh1H
+
+

@@ -1,3 +1,4 @@
 #!/bin/sh
 
 npx marp slides/puppeteer.md -o docs/slides/puppeteer.html
+cp -r slides/images docs/slides/
