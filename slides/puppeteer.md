@@ -6,6 +6,9 @@ inlineSVG: true
 <!-- _class: lead gaia -->
 # Puppeteer 難所攻略
 
+2020年4月15日
+[@tnzk / Kyohei Hamaguchi](https://twitter.com/tnzk)
+
 ---
 
 ## Puppeteer とは
