@@ -322,11 +322,11 @@ console.log(n);
 
 ---
 
-![bg contain](images/001.png)
+![bg contain](images/puppeteer/001.png)
 
 ---
 
-![bg contain](images/002.png)
+![bg contain](images/puppeteer/002.png)
 
 ---
 
@@ -339,7 +339,7 @@ console.log(n);
 
 ---
 
-![bg contain](images/003.webp)
+![bg contain](images/puppeteer/003.webp)
 
 ---
 
@@ -477,7 +477,7 @@ try {
 
 ---
 
-![bg contain](images/003.webp)  
+![bg contain](images/puppeteer/003.webp)
 
 <!-- 文化が違うなあと思った -->
 
