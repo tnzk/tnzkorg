@@ -1,0 +1,41 @@
+<hr>
+<h2>title: Trying openapi2aspida to auto-generate Type Definition for a Web API
+disro: https://dev.to/tnzk/trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api-2mpj/</h2>
+<p><a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf">Previously</a>, we had explored how <a href="https://github.com/aspidajs/aspida">Aspida</a> provides a way to integrate external Web APIs into your code in type-safe manner.</p>
+<p>But writing down the complete type definition of an API by hand hardly seems very fun. Rather, we'd like it to be generated automatically.</p>
+<p><a href="https://github.com/aspidajs/openapi2aspida">openapi2aspida</a> tools gives this functionality, as long as the API provides OpenAPI 3.0 or Swagger schema.</p>
+<h1>Generate Type Definition</h1>
+<p>Since you've followed instruction in previous post, you would have <code>apis</code> directory, which this time <code>openapi2aspida</code> expects it to be absent. So we need remove this before trying this tool.</p>
+<pre><code class="language-bash">$ rm -rf $REPO_ROOT/apis
+</code></pre>
+<p>Create aspida.config.js, Get JSON schema path</p>
+<p>Run this to generate and pour packages into <code>apis/</code>:</p>
+<pre><code class="language-bash">$ npx openapi2aspida --build
+</code></pre>
+<h1>Try using</h1>
+<pre><code class="language-bash">$ yarn run aspida-mock --build
+> Property 'resHeaders' is missing in type '{ status: 200; resBody: { about: { description: string; title: string; locale: string; version: string; https: true; moderators: { id: number; username: string; avatar_template: string; name: string; title: string; }[]; admins: { ...; }[]; }; }; }' but required in type 'BaseResponse&#x3C;{ about?: { description?: string; title?: string; locale?: string; version?: string; https?: boolean; moderators?: { id?: number; username?: string; avatar_template?: string; name?: string; title?: string; }[]; admins?: { ...; }[]; }; }, unknown, 200>'
+</code></pre>
+<p>Wow I thought I had tried to compile C++ abusing class templates here.</p>
+<p>This error seems to occur because Discourse API doc (perhaps including OpenAPI schema). Discourse maintainers said so in the <a href="https://docs.discourse.org/">doc</a> and <a href="https://meta.discourse.org/t/discourse-api-documentation/22706/257">the thread</a>.</p>
+<p>Let the linter explain before deep diving this ourselves:</p>
+<pre><code class="language-bash">$ yarn global add ibm-openapi-validator
+$ curl -O https://docs.discourse.org/openapi.json
+$ lint-openapi openapi.json | head -n 10
+
+[Warning] No .validaterc file found. The validator will run in default mode.
+To configure the validator, create a .validaterc file.
+
+errors
+
+  Message :   Parameters MUST have their data described by either `schema` or `content`.
+  Path    :   paths./c/{id}.json.get.parameters.0
+  Line    :   296
+
+$ lint-openapi openapi.json | wc -l
+1318
+</code></pre>
+<h1>Conclusion</h1>
+<p>We have tried Discourse API and found it lacked an OpenAPI-compiliant Schema. While <code>openapi2aspida</code> doesn't seem to work very well in this situation, but if you are in a project where you have well-written OpenAPI schema, <code>openapi2aspida</code> will be promising for your development.</p>
+<p>Unfortunately, you wouldn't find so many projects with OpenAPI Schema out there at the moment. Yet <a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf">we saw previously</a>, we can start writing type definition by hand as necessary.</p>
+<p>If you'll happen to be design a web API, you can contribute the OpenAPI ecosystem by starting it with writing OpenAPI Schema for the API. This might be encouraged from test-driven point of view.</p>
