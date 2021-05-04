@@ -18,6 +18,6 @@
 <h1>記事一覧</h1>
 <ul>
   {#each slugs as slug}
-    <li><a href="t/{slug}">{slug}</a></li>
+    <li><a href="/t/{slug}">{slug}</a></li>
   {/each}
 </ul>
