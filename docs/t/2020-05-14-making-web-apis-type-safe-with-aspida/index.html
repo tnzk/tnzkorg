@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Kyohei Hamaguchi （濱口恭平） / @tnzk</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-3063979-4" data-svelte="svelte-17kmz97"></script><script data-svelte="svelte-17kmz97">window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-3063979-4');
+  </script><meta charset="utf-8" data-svelte="svelte-17kmz97"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" data-svelte="svelte-17kmz97"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-17kmz97"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" data-svelte="svelte-17kmz97"><link rel="manifest" href="/site.webmanifest" data-svelte="svelte-17kmz97"><style data-svelte="svelte-17kmz97">@font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Medium");
+  }
+  @font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+  }
+  body {
+    margin: 0;
+    border-top: 5px #0F4C81 solid;
+    padding: 1em;
+    line-height: 1.6em;
+    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, "游ゴシック体", YuGothic, "Yu Gothic M", "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", HiraKakuProN-W3, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  h1,
+  h2 {
+    color: #0F4C81;
+  }
+  h1>img {
+    vertical-align: middle;
+  }
+  footer {
+    font-size: smaller;
+    color: #555;
+  }
+  </style>
+
+		
+
+		<link rel="modulepreload" href="/./_app/start-5de16d0b.js">
+		<link rel="modulepreload" href="/./_app/chunks/vendor-3a2d015f.js">
+		<link rel="modulepreload" href="/./_app/pages/$layout.svelte-98c90f26.js">
+		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-272b6899.js">
+		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
+
+		<script type="module">
+			import { start } from "/./_app/start-5de16d0b.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":"/."},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/./_app/pages/$layout.svelte-98c90f26.js"),
+						import("/./_app/pages/t/[slug].svelte-272b6899.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/t/2020-05-14-making-web-apis-type-safe-with-aspida",
+						query: new URLSearchParams(""),
+						params: {"slug":"2020-05-14-making-web-apis-type-safe-with-aspida"}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+
+<a href="/t">記事一覧</a>
+
+<h1>Making Web APIs Type-safe with Aspida</h1>
+
+
+  <a href="">en</a>
+
+<p>This document is available at <a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf" target="_blank">https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf</a></p>
+<p>Types matter. Even with the naive type system of C/C++, I used to feel somehow protected.</p>
+<p>TypeScript enables for JavaScript libraries to provide their type definitions but Web APIs. Actually, majority of APIs lack precise documentation, let alone type definition.</p>
+<p><a href="https://github.com/aspidajs/aspida">Aspida</a> fills this blind spot. Few HTTP client libraries on NPM provide this capability.</p>
+<p>In this article, I demonstrate how we can invoke Discourse API as an example in type-safe manner.</p>
+<h1>Setting up Aspida</h1>
+<p>You can setup Aspida according <a href="https://github.com/aspidajs/aspida">the official README</a>.</p>
+<p>Since Aspida provides just an abstraction layer for type-safety, you need to chose one of HTTP client library as its back-end. Major libraries (<a href="https://github.com/aspidajs/aspida/tree/master/packages/aspida-axios">axios</a>, <a href="https://github.com/aspidajs/aspida/tree/master/packages/aspida-ky">ky</a>, <a href="https://github.com/aspidajs/aspida/tree/master/packages/aspida-fetch">fetch</a> and <a href="https://github.com/aspidajs/aspida/tree/master/packages/aspida-node-fetch">node-fetch</a>) seem to be supported.</p>
+<p>Here, I pick axios.</p>
+<h1>Overview of Discourse API</h1>
+<p>You may know that <a href="https://www.discourse.org/">Discourse</a> is an open source discussion platform.</p>
+<p>I try accessing an instance of Discourse via its Web API and show the names of visible Categories in the forum for demonstration.</p>
+<p>Discourse API is a simple RESTful API, with <a href="https://docs.discourse.org/">nice and sufficient documentation</a>. I'm not so fluent about the API, but it seems to cover almost all of its functionalities.</p>
+<p>Since <a href="https://ichiji.social/@tnzk">I'm the Server Admin of a Mastodon server</a>, I chose <a href="https://discourse.joinmastodon.org/">Mastodon Meta Discussion Board</a> for an example :)</p>
+<h1>Creating Type definition</h1>
+<p>First of all, we need the type definition.</p>
+<p>You can assign types for the response and request parameters of your favorite APIs with Aspida, by putting type definition files in <code>$REPO_ROOT/apis/</code> like:</p>
+<pre><code class="language-typescript">export type CategoryList = {
+    can_create_category: boolean,
+    can_create_topic: boolean,
+    draft: boolean,
+    draft_key: string,
+    draft_sequence: number,
+    categories: Category[]
+}
+
+export type Category = {
+    id: number,
+    name: string,
+    color: string,
+    text_color: string
+    slug: string,
+    topic_count: number,
+    post_count: number,
+    position: number,
+    description: string,
+    description_text: string,
+    topic_url: string,
+    logo_url: string,
+    background_url: string,
+    read_restricted: boolean,
+    permission: number,
+    notification_level: string,
+    can_edit: boolean,
+    topic_template: string,
+    has_children: boolean,
+    topics_day: number,
+    topics_week: number,
+    topics_month: number,
+    topics_year: number,
+    topics_all_time: number,
+    description_excerpt: string,
+}
+
+export type Methods = {
+    get: {
+        resBody: {
+            category_list: CategoryList
+        },
+    }
+}
+</code></pre>
+<p>This time I put this as <code>categories.ts</code>.</p>
+<p>This is a hand-crafted type definition :tm: looking up <a href="https://docs.discourse.org/#tag/Categories">the API documentation</a> :muscle:</p>
+<h1>Building the Type definition</h1>
+<p>Once you have created the type definition, you need to build before using in application:</p>
+<pre><code class="language-bash">$ yarn run aspida --build
+</code></pre>
+<p>You may be happier by having this defined in <code>package.json</code>.</p>
+<h1>Invoking the API in Application</h1>
+<p>Now you can invoke the API in type-safe manner! You can write your application like below.</p>
+<pre><code class="language-javascript">import dotenv from "dotenv"
+import axios from "axios"
+import aspida from "@aspida/axios"
+import api from "../apis/$api"
+import type { CategoryList } from "../apis/categories"
+
+dotenv.config()
+
+const axiosConfig = {
+    timeout: 3000,
+    baseURL: 'https://discourse.joinmastodon.org',
+    headers: {
+        'Accept': 'application/json',
+//        'Api-Username': process.env.DISCOURSE_API_USERNAME,
+//        'Api-Key': process.env.DISCOURSE_API_KEY,
+    }
+}
+
+let client = api(aspida(axios, axiosConfig))
+
+;(async () => {
+    client.categories.get()
+        .then(response => {
+            let category_list = response.data.category_list
+            category_list.categories.forEach(cat => console.log(cat.name))
+        })
+        .catch(error => console.log(error))
+})()
+</code></pre>
+<p>It seems you need to import types explicitly if you want enable code-completion.</p>
+<p>Also, you can pass Axios options at instantiation of Aspida. I had confirmed it worked well with headers for authentication.</p>
+<p>This results:</p>
+<pre><code class="language-bash">$ yarn run start
+Server administration
+General
+Core development
+App development
+Translation
+Meta feedback
+Feedback
+Done in 10.56s.
+</code></pre>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/jhg8u8v7ym1n90on6go2.png" alt=""></p>
+<p>Looks good :+1:</p>
+<p>You can see complete code at: https://github.com/tnzk/aspida-demo</p>
+<p>You're now embraced in type system, so you won't break a thing like:</p>
+<pre><code>category_list.categories.forEach(cat => console.log(cat.name * 1))
+</code></pre>
+<p>because this will be detected <strong>at compile time</strong>:</p>
+<pre><code>src/discourse-list-category.ts:25:65 - error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+
+25             category_list.categories.forEach(cat => console.log(cat.name * 1))
+</code></pre>
+<h1>Upnext</h1>
+<p>Aspida has another interesting functionality which automatically build type definitions from OpenAPI Specification.</p>
+<p>Since Discourse API provides it, we'll try this in next article :)</p>
+
+<footer>Kyohei Hamaguchi (tnzk) © 2010-2020</footer>
+
+
+
+	<script type="svelte-data" url="2020-05-14-making-web-apis-type-safe-with-aspida.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"en\":{\"title\":\"Making Web APIs Type-safe with Aspida\",\"distro\":\"https:\u002F\u002Fdev.to\u002Ftnzk\u002Fmaking-web-apis-type-safe-with-aspida-fkf\",\"body\":\"\u003Cp\u003ETypes matter. Even with the naive type system of C\u002FC++, I used to feel somehow protected.\u003C\u002Fp\u003E\\n\u003Cp\u003ETypeScript enables for JavaScript libraries to provide their type definitions but Web APIs. Actually, majority of APIs lack precise documentation, let alone type definition.\u003C\u002Fp\u003E\\n\u003Cp\u003E\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\\\"\u003EAspida\u003C\u002Fa\u003E fills this blind spot. Few HTTP client libraries on NPM provide this capability.\u003C\u002Fp\u003E\\n\u003Cp\u003EIn this article, I demonstrate how we can invoke Discourse API as an example in type-safe manner.\u003C\u002Fp\u003E\\n\u003Ch1\u003ESetting up Aspida\u003C\u002Fh1\u003E\\n\u003Cp\u003EYou can setup Aspida according \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\\\"\u003Ethe official README\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\\n\u003Cp\u003ESince Aspida provides just an abstraction layer for type-safety, you need to chose one of HTTP client library as its back-end. Major libraries (\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\u002Ftree\u002Fmaster\u002Fpackages\u002Faspida-axios\\\"\u003Eaxios\u003C\u002Fa\u003E, \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\u002Ftree\u002Fmaster\u002Fpackages\u002Faspida-ky\\\"\u003Eky\u003C\u002Fa\u003E, \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\u002Ftree\u002Fmaster\u002Fpackages\u002Faspida-fetch\\\"\u003Efetch\u003C\u002Fa\u003E and \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\u002Ftree\u002Fmaster\u002Fpackages\u002Faspida-node-fetch\\\"\u003Enode-fetch\u003C\u002Fa\u003E) seem to be supported.\u003C\u002Fp\u003E\\n\u003Cp\u003EHere, I pick axios.\u003C\u002Fp\u003E\\n\u003Ch1\u003EOverview of Discourse API\u003C\u002Fh1\u003E\\n\u003Cp\u003EYou may know that \u003Ca href=\\\"https:\u002F\u002Fwww.discourse.org\u002F\\\"\u003EDiscourse\u003C\u002Fa\u003E is an open source discussion platform.\u003C\u002Fp\u003E\\n\u003Cp\u003EI try accessing an instance of Discourse via its Web API and show the names of visible Categories in the forum for demonstration.\u003C\u002Fp\u003E\\n\u003Cp\u003EDiscourse API is a simple RESTful API, with \u003Ca href=\\\"https:\u002F\u002Fdocs.discourse.org\u002F\\\"\u003Enice and sufficient documentation\u003C\u002Fa\u003E. I'm not so fluent about the API, but it seems to cover almost all of its functionalities.\u003C\u002Fp\u003E\\n\u003Cp\u003ESince \u003Ca href=\\\"https:\u002F\u002Fichiji.social\u002F@tnzk\\\"\u003EI'm the Server Admin of a Mastodon server\u003C\u002Fa\u003E, I chose \u003Ca href=\\\"https:\u002F\u002Fdiscourse.joinmastodon.org\u002F\\\"\u003EMastodon Meta Discussion Board\u003C\u002Fa\u003E for an example :)\u003C\u002Fp\u003E\\n\u003Ch1\u003ECreating Type definition\u003C\u002Fh1\u003E\\n\u003Cp\u003EFirst of all, we need the type definition.\u003C\u002Fp\u003E\\n\u003Cp\u003EYou can assign types for the response and request parameters of your favorite APIs with Aspida, by putting type definition files in \u003Ccode\u003E$REPO_ROOT\u002Fapis\u002F\u003C\u002Fcode\u003E like:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-typescript\\\"\u003Eexport type CategoryList = {\\n    can_create_category: boolean,\\n    can_create_topic: boolean,\\n    draft: boolean,\\n    draft_key: string,\\n    draft_sequence: number,\\n    categories: Category[]\\n}\\n\\nexport type Category = {\\n    id: number,\\n    name: string,\\n    color: string,\\n    text_color: string\\n    slug: string,\\n    topic_count: number,\\n    post_count: number,\\n    position: number,\\n    description: string,\\n    description_text: string,\\n    topic_url: string,\\n    logo_url: string,\\n    background_url: string,\\n    read_restricted: boolean,\\n    permission: number,\\n    notification_level: string,\\n    can_edit: boolean,\\n    topic_template: string,\\n    has_children: boolean,\\n    topics_day: number,\\n    topics_week: number,\\n    topics_month: number,\\n    topics_year: number,\\n    topics_all_time: number,\\n    description_excerpt: string,\\n}\\n\\nexport type Methods = {\\n    get: {\\n        resBody: {\\n            category_list: CategoryList\\n        },\\n    }\\n}\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EThis time I put this as \u003Ccode\u003Ecategories.ts\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\\n\u003Cp\u003EThis is a hand-crafted type definition :tm: looking up \u003Ca href=\\\"https:\u002F\u002Fdocs.discourse.org\u002F#tag\u002FCategories\\\"\u003Ethe API documentation\u003C\u002Fa\u003E :muscle:\u003C\u002Fp\u003E\\n\u003Ch1\u003EBuilding the Type definition\u003C\u002Fh1\u003E\\n\u003Cp\u003EOnce you have created the type definition, you need to build before using in application:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ yarn run aspida --build\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EYou may be happier by having this defined in \u003Ccode\u003Epackage.json\u003C\u002Fcode\u003E.\u003C\u002Fp\u003E\\n\u003Ch1\u003EInvoking the API in Application\u003C\u002Fh1\u003E\\n\u003Cp\u003ENow you can invoke the API in type-safe manner! You can write your application like below.\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-javascript\\\"\u003Eimport dotenv from \\\"dotenv\\\"\\nimport axios from \\\"axios\\\"\\nimport aspida from \\\"@aspida\u002Faxios\\\"\\nimport api from \\\"..\u002Fapis\u002F$api\\\"\\nimport type { CategoryList } from \\\"..\u002Fapis\u002Fcategories\\\"\\n\\ndotenv.config()\\n\\nconst axiosConfig = {\\n    timeout: 3000,\\n    baseURL: 'https:\u002F\u002Fdiscourse.joinmastodon.org',\\n    headers: {\\n        'Accept': 'application\u002Fjson',\\n\u002F\u002F        'Api-Username': process.env.DISCOURSE_API_USERNAME,\\n\u002F\u002F        'Api-Key': process.env.DISCOURSE_API_KEY,\\n    }\\n}\\n\\nlet client = api(aspida(axios, axiosConfig))\\n\\n;(async () =\u003E {\\n    client.categories.get()\\n        .then(response =\u003E {\\n            let category_list = response.data.category_list\\n            category_list.categories.forEach(cat =\u003E console.log(cat.name))\\n        })\\n        .catch(error =\u003E console.log(error))\\n})()\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EIt seems you need to import types explicitly if you want enable code-completion.\u003C\u002Fp\u003E\\n\u003Cp\u003EAlso, you can pass Axios options at instantiation of Aspida. I had confirmed it worked well with headers for authentication.\u003C\u002Fp\u003E\\n\u003Cp\u003EThis results:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ yarn run start\\nServer administration\\nGeneral\\nCore development\\nApp development\\nTranslation\\nMeta feedback\\nFeedback\\nDone in 10.56s.\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003E\u003Cimg src=\\\"https:\u002F\u002Fdev-to-uploads.s3.amazonaws.com\u002Fi\u002Fjhg8u8v7ym1n90on6go2.png\\\" alt=\\\"\\\"\u003E\u003C\u002Fp\u003E\\n\u003Cp\u003ELooks good :+1:\u003C\u002Fp\u003E\\n\u003Cp\u003EYou can see complete code at: https:\u002F\u002Fgithub.com\u002Ftnzk\u002Faspida-demo\u003C\u002Fp\u003E\\n\u003Cp\u003EYou're now embraced in type system, so you won't break a thing like:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode\u003Ecategory_list.categories.forEach(cat =\u003E console.log(cat.name * 1))\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003Ebecause this will be detected \u003Cstrong\u003Eat compile time\u003C\u002Fstrong\u003E:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode\u003Esrc\u002Fdiscourse-list-category.ts:25:65 - error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\\n\\n25             category_list.categories.forEach(cat =\u003E console.log(cat.name * 1))\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Ch1\u003EUpnext\u003C\u002Fh1\u003E\\n\u003Cp\u003EAspida has another interesting functionality which automatically build type definitions from OpenAPI Specification.\u003C\u002Fp\u003E\\n\u003Cp\u003ESince Discourse API provides it, we'll try this in next article :)\u003C\u002Fp\u003E\\n\"}}"}</script>
+</div>
+	</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Kyohei Hamaguchi （濱口恭平） / @tnzk</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-3063979-4" data-svelte="svelte-17kmz97"></script><script data-svelte="svelte-17kmz97">window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-3063979-4');
+  </script><meta charset="utf-8" data-svelte="svelte-17kmz97"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" data-svelte="svelte-17kmz97"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-17kmz97"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" data-svelte="svelte-17kmz97"><link rel="manifest" href="/site.webmanifest" data-svelte="svelte-17kmz97"><style data-svelte="svelte-17kmz97">@font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Medium");
+  }
+  @font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+  }
+  body {
+    margin: 0;
+    border-top: 5px #0F4C81 solid;
+    padding: 1em;
+    line-height: 1.6em;
+    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, "游ゴシック体", YuGothic, "Yu Gothic M", "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", HiraKakuProN-W3, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  h1,
+  h2 {
+    color: #0F4C81;
+  }
+  h1>img {
+    vertical-align: middle;
+  }
+  footer {
+    font-size: smaller;
+    color: #555;
+  }
+  </style>
+
+		
+
+		<link rel="modulepreload" href="/./_app/start-5de16d0b.js">
+		<link rel="modulepreload" href="/./_app/chunks/vendor-3a2d015f.js">
+		<link rel="modulepreload" href="/./_app/pages/$layout.svelte-98c90f26.js">
+		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-272b6899.js">
+		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
+
+		<script type="module">
+			import { start } from "/./_app/start-5de16d0b.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":"/."},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/./_app/pages/$layout.svelte-98c90f26.js"),
+						import("/./_app/pages/t/[slug].svelte-272b6899.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/t/2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api",
+						query: new URLSearchParams(""),
+						params: {"slug":"2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api"}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+
+<a href="/t">記事一覧</a>
+
+<h1>Trying openapi2aspida to auto-generate Type Definition for a Web API</h1>
+
+
+  <a href="">en</a>
+
+<p>This document is available at <a target="_blank">undefined</a></p>
+<p><a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf">Previously</a>, we had explored how <a href="https://github.com/aspidajs/aspida">Aspida</a> provides a way to integrate external Web APIs into your code in type-safe manner.</p>
+<p>But writing down the complete type definition of an API by hand hardly seems very fun. Rather, we'd like it to be generated automatically.</p>
+<p><a href="https://github.com/aspidajs/openapi2aspida">openapi2aspida</a> tools gives this functionality, as long as the API provides OpenAPI 3.0 or Swagger schema.</p>
+<h1>Generate Type Definition</h1>
+<p>Since you've followed instruction in previous post, you would have <code>apis</code> directory, which this time <code>openapi2aspida</code> expects it to be absent. So we need remove this before trying this tool.</p>
+<pre><code class="language-bash">$ rm -rf $REPO_ROOT/apis
+</code></pre>
+<p>Create aspida.config.js, Get JSON schema path</p>
+<p>Run this to generate and pour packages into <code>apis/</code>:</p>
+<pre><code class="language-bash">$ npx openapi2aspida --build
+</code></pre>
+<h1>Try using</h1>
+<pre><code class="language-bash">$ yarn run aspida-mock --build
+> Property 'resHeaders' is missing in type '{ status: 200; resBody: { about: { description: string; title: string; locale: string; version: string; https: true; moderators: { id: number; username: string; avatar_template: string; name: string; title: string; }[]; admins: { ...; }[]; }; }; }' but required in type 'BaseResponse&#x3C;{ about?: { description?: string; title?: string; locale?: string; version?: string; https?: boolean; moderators?: { id?: number; username?: string; avatar_template?: string; name?: string; title?: string; }[]; admins?: { ...; }[]; }; }, unknown, 200>'
+</code></pre>
+<p>Wow I thought I had tried to compile C++ abusing class templates here.</p>
+<p>This error seems to occur because Discourse API doc (perhaps including OpenAPI schema). Discourse maintainers said so in the <a href="https://docs.discourse.org/">doc</a> and <a href="https://meta.discourse.org/t/discourse-api-documentation/22706/257">the thread</a>.</p>
+<p>Let the linter explain before deep diving this ourselves:</p>
+<pre><code class="language-bash">$ yarn global add ibm-openapi-validator
+$ curl -O https://docs.discourse.org/openapi.json
+$ lint-openapi openapi.json | head -n 10
+
+[Warning] No .validaterc file found. The validator will run in default mode.
+To configure the validator, create a .validaterc file.
+
+errors
+
+  Message :   Parameters MUST have their data described by either `schema` or `content`.
+  Path    :   paths./c/{id}.json.get.parameters.0
+  Line    :   296
+
+$ lint-openapi openapi.json | wc -l
+1318
+</code></pre>
+<h1>Conclusion</h1>
+<p>We have tried Discourse API and found it lacked an OpenAPI-compiliant Schema. While <code>openapi2aspida</code> doesn't seem to work very well in this situation, but if you are in a project where you have well-written OpenAPI schema, <code>openapi2aspida</code> will be promising for your development.</p>
+<p>Unfortunately, you wouldn't find so many projects with OpenAPI Schema out there at the moment. Yet <a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf">we saw previously</a>, we can start writing type definition by hand as necessary.</p>
+<p>If you'll happen to be design a web API, you can contribute the OpenAPI ecosystem by starting it with writing OpenAPI Schema for the API. This might be encouraged from test-driven point of view.</p>
+
+<footer>Kyohei Hamaguchi (tnzk) © 2010-2020</footer>
+
+
+
+	<script type="svelte-data" url="2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"en\":{\"title\":\"Trying openapi2aspida to auto-generate Type Definition for a Web API\",\"body\":\"\u003Cp\u003E\u003Ca href=\\\"https:\u002F\u002Fdev.to\u002Ftnzk\u002Fmaking-web-apis-type-safe-with-aspida-fkf\\\"\u003EPreviously\u003C\u002Fa\u003E, we had explored how \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Faspida\\\"\u003EAspida\u003C\u002Fa\u003E provides a way to integrate external Web APIs into your code in type-safe manner.\u003C\u002Fp\u003E\\n\u003Cp\u003EBut writing down the complete type definition of an API by hand hardly seems very fun. Rather, we'd like it to be generated automatically.\u003C\u002Fp\u003E\\n\u003Cp\u003E\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Faspidajs\u002Fopenapi2aspida\\\"\u003Eopenapi2aspida\u003C\u002Fa\u003E tools gives this functionality, as long as the API provides OpenAPI 3.0 or Swagger schema.\u003C\u002Fp\u003E\\n\u003Ch1\u003EGenerate Type Definition\u003C\u002Fh1\u003E\\n\u003Cp\u003ESince you've followed instruction in previous post, you would have \u003Ccode\u003Eapis\u003C\u002Fcode\u003E directory, which this time \u003Ccode\u003Eopenapi2aspida\u003C\u002Fcode\u003E expects it to be absent. So we need remove this before trying this tool.\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ rm -rf $REPO_ROOT\u002Fapis\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003ECreate aspida.config.js, Get JSON schema path\u003C\u002Fp\u003E\\n\u003Cp\u003ERun this to generate and pour packages into \u003Ccode\u003Eapis\u002F\u003C\u002Fcode\u003E:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ npx openapi2aspida --build\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Ch1\u003ETry using\u003C\u002Fh1\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ yarn run aspida-mock --build\\n\u003E Property 'resHeaders' is missing in type '{ status: 200; resBody: { about: { description: string; title: string; locale: string; version: string; https: true; moderators: { id: number; username: string; avatar_template: string; name: string; title: string; }[]; admins: { ...; }[]; }; }; }' but required in type 'BaseResponse&#x3C;{ about?: { description?: string; title?: string; locale?: string; version?: string; https?: boolean; moderators?: { id?: number; username?: string; avatar_template?: string; name?: string; title?: string; }[]; admins?: { ...; }[]; }; }, unknown, 200\u003E'\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EWow I thought I had tried to compile C++ abusing class templates here.\u003C\u002Fp\u003E\\n\u003Cp\u003EThis error seems to occur because Discourse API doc (perhaps including OpenAPI schema). Discourse maintainers said so in the \u003Ca href=\\\"https:\u002F\u002Fdocs.discourse.org\u002F\\\"\u003Edoc\u003C\u002Fa\u003E and \u003Ca href=\\\"https:\u002F\u002Fmeta.discourse.org\u002Ft\u002Fdiscourse-api-documentation\u002F22706\u002F257\\\"\u003Ethe thread\u003C\u002Fa\u003E.\u003C\u002Fp\u003E\\n\u003Cp\u003ELet the linter explain before deep diving this ourselves:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-bash\\\"\u003E$ yarn global add ibm-openapi-validator\\n$ curl -O https:\u002F\u002Fdocs.discourse.org\u002Fopenapi.json\\n$ lint-openapi openapi.json | head -n 10\\n\\n[Warning] No .validaterc file found. The validator will run in default mode.\\nTo configure the validator, create a .validaterc file.\\n\\nerrors\\n\\n  Message :   Parameters MUST have their data described by either `schema` or `content`.\\n  Path    :   paths.\u002Fc\u002F{id}.json.get.parameters.0\\n  Line    :   296\\n\\n$ lint-openapi openapi.json | wc -l\\n1318\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Ch1\u003EConclusion\u003C\u002Fh1\u003E\\n\u003Cp\u003EWe have tried Discourse API and found it lacked an OpenAPI-compiliant Schema. While \u003Ccode\u003Eopenapi2aspida\u003C\u002Fcode\u003E doesn't seem to work very well in this situation, but if you are in a project where you have well-written OpenAPI schema, \u003Ccode\u003Eopenapi2aspida\u003C\u002Fcode\u003E will be promising for your development.\u003C\u002Fp\u003E\\n\u003Cp\u003EUnfortunately, you wouldn't find so many projects with OpenAPI Schema out there at the moment. Yet \u003Ca href=\\\"https:\u002F\u002Fdev.to\u002Ftnzk\u002Fmaking-web-apis-type-safe-with-aspida-fkf\\\"\u003Ewe saw previously\u003C\u002Fa\u003E, we can start writing type definition by hand as necessary.\u003C\u002Fp\u003E\\n\u003Cp\u003EIf you'll happen to be design a web API, you can contribute the OpenAPI ecosystem by starting it with writing OpenAPI Schema for the API. This might be encouraged from test-driven point of view.\u003C\u002Fp\u003E\\n\"}}"}</script>
+</div>
+	</body>
+</html>
