@@ -1,10 +1,4 @@
 #!/bin/sh
 
-#npx marp slides/puppeteer.md -o docs/slides/puppeteer.html
-#cp -r slides/images docs/slides/
-
-npx remark --use html writings/*md -o docs/writings
-
-echo "<ul>" > docs/writings/index.html
-ls docs/writings | sed -e 's/^\(.*\)/<li><a href=\"\/writings\/\1\">\1<\/a><\/li>/' >> docs/writings/index.html
-echo "</ul>" >> docs/writings/index.html
+npx marp slides/puppeteer.md -o docs/slides/puppeteer.html
+cp -r slides/images docs/slides/
