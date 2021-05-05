@@ -19,7 +19,12 @@
 <p>システム開発会社社長・プログラミングスクール運営会社CTO・他役員や技術顧問等 / 1990年生まれ。鳥羽商船高専制御情報工学科→筑波大情報科学類→仮想化テック系ベンチャーCTO→フリーランス→開発会社＋スクール運営 / 全日本剣道連盟居合道三段・無雙直伝英信流土佐大田派もうすぐ初段 / 4歳児のパパ</p>
 <p>C++/.NET/nasmを使ってソフトウェアドライバの開発などをしていたので、ローレイヤに割と強いです。Web系の開発はRuby/Rails, PHP, Node, SSGなど幅広くやっています。画像認識系もときどきやります。PyTorchを使います。</p>
 <p>最近はエンジニア組織のチームビルディングや、PdM・PMをやることが多いです。事業ドメインと成長段階に合わせて&quot;ちょうどよく&quot;スケールしていける（ソフトウェア|人的）システムを作ることが得意です。</p>
-<p><a href="https://twitter.com/tnzk" target="_blank">Twitter / @tnzk</a></p>
+<p>
+  Twitter:
+  <a href="https://twitter.com/tnzk" target="_blank">@tnzk</a>
+  &nbsp;/&nbsp;
+  <a href="https://twitter.com/hmgchk" target="_blank">@hmgchk</a>
+</p>
 <section>
   <h2>現在</h2>
   <ul>
