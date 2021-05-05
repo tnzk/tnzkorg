@@ -41,14 +41,15 @@
 
 		
 
-		<link rel="modulepreload" href="/./_app/start-b406cd6b.js">
+		<link rel="modulepreload" href="/./_app/start-82b65c49.js">
 		<link rel="modulepreload" href="/./_app/chunks/vendor-3a2d015f.js">
 		<link rel="modulepreload" href="/./_app/pages/$layout.svelte-98c90f26.js">
-		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-272b6899.js">
+		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-0e7058fa.js">
 		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/t/[slug].svelte-a8ebcbeb.css">
 
 		<script type="module">
-			import { start } from "/./_app/start-b406cd6b.js";
+			import { start } from "/./_app/start-82b65c49.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":"/."},
@@ -61,7 +62,7 @@
 					error: null,
 					nodes: [
 						import("/./_app/pages/$layout.svelte-98c90f26.js"),
-						import("/./_app/pages/t/[slug].svelte-272b6899.js")
+						import("/./_app/pages/t/[slug].svelte-0e7058fa.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -83,9 +84,10 @@
 <h1>Making Web APIs Type-safe with Aspida</h1>
 
 
-  <a href="">en</a>
 
-<p>This document is available at <a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf" target="_blank">https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf</a></p>
+<p class="availableAt svelte-12hmnws">This document is available at:
+    <a href="https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf" target="_blank">https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf</a></p>
+
 <p>Types matter. Even with the naive type system of C/C++, I used to feel somehow protected.</p>
 <p>TypeScript enables for JavaScript libraries to provide their type definitions but Web APIs. Actually, majority of APIs lack precise documentation, let alone type definition.</p>
 <p><a href="https://github.com/aspidajs/aspida">Aspida</a> fills this blind spot. Few HTTP client libraries on NPM provide this capability.</p>

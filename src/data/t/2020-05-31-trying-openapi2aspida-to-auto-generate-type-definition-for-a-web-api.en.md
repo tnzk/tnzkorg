@@ -1,6 +1,6 @@
 ---
 title: Trying openapi2aspida to auto-generate Type Definition for a Web API 
-disro: https://dev.to/tnzk/trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api-2mpj/
+distro: https://dev.to/tnzk/trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api-2mpj/
 ---
 
 [Previously](https://dev.to/tnzk/making-web-apis-type-safe-with-aspida-fkf), we had explored how [Aspida](https://github.com/aspidajs/aspida) provides a way to integrate external Web APIs into your code in type-safe manner.

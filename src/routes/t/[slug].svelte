@@ -26,12 +26,29 @@
 
 <h1>{article.title}</h1>
 
-{#each languages as lang, i}
-  {#if i > 0}
-    &nbsp;|&nbsp;
-  {/if}
-  <a href="" on:click={changeLanguage(lang)}>{lang}</a>
-{/each}
+{#if languages.length > 1}
+  {#each languages as lang, i}
+    {#if i > 0}
+      &nbsp;|&nbsp;
+    {/if}
+    <a href="" on:click={changeLanguage(lang)}>{lang}</a>
+  {/each}
+{/if}
 
-<p>This document is available at <a href={article.distro} target="_blank">{article.distro}</a></p>
+{#if article.distro}
+  <p class="availableAt">
+    This document is available at:
+    <a href={article.distro} target="_blank">{article.distro}</a>
+  </p>
+{/if}
+
 {@html article.body}
+
+<style>
+  p.availableAt {
+    border: 1px solid #9DBDD7;
+    background: #E0EFFD;
+    padding: 0.7em 1em;
+    color: #9DBDD7;
+  }
+</style>

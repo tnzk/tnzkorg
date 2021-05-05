@@ -1,17 +1,14 @@
 <script context="module">
   export const prerender = true;
   export async function load({ fetch }) {
-    const { slugs } = await fetch(`t.json`).then((r) => r.json());
-    return {
-      props: {
-        slugs
-      }
-    };
+    const { articles } = await fetch(`t.json`).then((r) => r.json());
+    return { props: { articles } };
   }
 </script>
 
 <script>
-  export let slugs;
+  import Articles from './_Articles.svelte';
+  export let articles;
 </script>
 
 <h1>
@@ -62,9 +59,5 @@
 -->
 <section>
   <h2>記事</h2>
-  <ul>
-    {#each slugs as slug}
-      <li><a href="t/{slug}">{slug}</a></li>
-    {/each}
-  </ul>
+  <Articles {articles} />
 </section>
