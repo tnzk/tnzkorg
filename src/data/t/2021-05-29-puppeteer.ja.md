@@ -2,11 +2,13 @@
 marp: true
 theme: gaia
 inlineSVG: true
+title: Puppeteer 難所攻略
+draft: true
 ---
 <!-- _class: lead gaia -->
 # Puppeteer 難所攻略
 
-2020年4月15日
+2021年4月15日
 [@tnzk / Kyohei Hamaguchi](https://twitter.com/tnzk)
 
 ---
@@ -322,11 +324,11 @@ console.log(n);
 
 ---
 
-![bg contain](images/puppeteer/001.png)
+![bg contain](/images/slides/puppeteer/001.png)
 
 ---
 
-![bg contain](images/puppeteer/002.png)
+![bg contain](/images/slides/puppeteer/002.png)
 
 ---
 
@@ -339,7 +341,7 @@ console.log(n);
 
 ---
 
-![bg contain](images/puppeteer/003.webp)
+![bg contain](/images/slides/puppeteer/003.webp)
 
 ---
 
@@ -477,7 +479,7 @@ try {
 
 ---
 
-![bg contain](images/puppeteer/003.webp)
+![bg contain](/images/slides/puppeteer/003.webp)
 
 <!-- 文化が違うなあと思った -->
 
@@ -503,5 +505,3 @@ try {
 - https://commons.wikimedia.org/wiki/File:GNOME_Terminal_icon_2019.svg
 - https://commons.wikimedia.org/wiki/File:Chromium_(web_browser).png
 - https://alu.jp/series/%E3%83%92%E3%82%B9%E3%83%88%E3%83%AA%E3%82%A8/crop/DadKPetAw3VZt3wswh1H
-
-

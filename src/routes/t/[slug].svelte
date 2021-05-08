@@ -1,4 +1,11 @@
-<script context="module">
+<script context="module" lang="ts">
+  type Article = {
+    title: string,
+    createdAt: string,
+    distro: string,
+    marp?: boolean,
+    body: string,
+  };
   export const prerender = true;
   export async function load({ page, fetch }) {
     let { slug } = page.params;
@@ -10,13 +17,11 @@
   }
 </script>
 
-<script>
+<script lang="ts">
   export let articleSet;
   export let languages;
 
-  let article = articleSet[languages[0]];
-
-  let currentLanguage = languages[0];
+  let article:Article = articleSet[languages[0]];
   let changeLanguage = (lang) => {
     article = articleSet[lang];
   };
@@ -31,7 +36,7 @@
     {#if i > 0}
       &nbsp;|&nbsp;
     {/if}
-    <a href="" on:click={changeLanguage(lang)}>{lang}</a>
+    <a href="#/" on:click={() => changeLanguage(lang)}>{lang}</a>
   {/each}
 {/if}
 
@@ -42,10 +47,18 @@
   </p>
 {/if}
 
-{@html article.body}
+{#if article?.marp}
+  <iframe title={article.title} srcdoc={article.body}></iframe>
+{:else}
+  {@html article.body}
+{/if}
 
 <style>
-  p.availableAt {
+  iframe {
+    width: 100%;
+    height: 100vh;
+  }
+  .availableAt {
     border: 1px solid #9DBDD7;
     background: #E0EFFD;
     padding: 0.7em 1em;
