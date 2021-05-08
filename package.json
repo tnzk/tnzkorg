@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/tnzk/tnzkorg#readme",
   "devDependencies": {
+    "@marp-team/marp-cli": "^1.0.2",
     "@marp-team/marp-core": "^2.0.1",
     "@sveltejs/adapter-static": "^1.0.0-next.4",
     "@sveltejs/kit": "next",
