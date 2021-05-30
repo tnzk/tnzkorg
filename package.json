@@ -6,7 +6,8 @@
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "marp:build": "npx marp --allow-local-files --html --pdf"
   },
   "repository": {
     "type": "git",

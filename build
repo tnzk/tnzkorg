@@ -1,4 +1,0 @@
-#!/bin/sh
-
-ls src/data/t | xargs -I {} npx marp src/data/t/{} -o static/slides/{}.pdf
-npm run build
