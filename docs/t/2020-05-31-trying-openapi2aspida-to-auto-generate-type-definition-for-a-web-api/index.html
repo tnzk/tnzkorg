@@ -41,15 +41,15 @@
 
 		
 
-		<link rel="modulepreload" href="/./_app/start-3233a53f.js">
+		<link rel="modulepreload" href="/./_app/start-c87ae788.js">
 		<link rel="modulepreload" href="/./_app/chunks/vendor-c6d05778.js">
-		<link rel="modulepreload" href="/./_app/pages/$layout.svelte-5fc7026e.js">
+		<link rel="modulepreload" href="/./_app/pages/__layout.svelte-7124b4cc.js">
 		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-2d927b40.js">
 		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
 		<link rel="stylesheet" href="/./_app/assets/pages/t/[slug].svelte-8a534da5.css">
 
 		<script type="module">
-			import { start } from "/./_app/start-3233a53f.js";
+			import { start } from "/./_app/start-c87ae788.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":"/."},
@@ -57,11 +57,12 @@
 				host: location.host,
 				route: true,
 				spa: false,
+				trailing_slash: "never",
 				hydrate: {
 					status: 200,
 					error: null,
 					nodes: [
-						import("/./_app/pages/$layout.svelte-5fc7026e.js"),
+						import("/./_app/pages/__layout.svelte-7124b4cc.js"),
 						import("/./_app/pages/t/[slug].svelte-2d927b40.js")
 					],
 					page: {

@@ -41,15 +41,16 @@
 
 		
 
-		<link rel="modulepreload" href="/./_app/start-3233a53f.js">
+		<link rel="modulepreload" href="/./_app/start-c87ae788.js">
 		<link rel="modulepreload" href="/./_app/chunks/vendor-c6d05778.js">
-		<link rel="modulepreload" href="/./_app/pages/$layout.svelte-5fc7026e.js">
-		<link rel="modulepreload" href="/./_app/pages/index.svelte-9b8467dc.js">
+		<link rel="modulepreload" href="/./_app/pages/__layout.svelte-7124b4cc.js">
+		<link rel="modulepreload" href="/./_app/pages/index.svelte-a860262a.js">
 		<link rel="modulepreload" href="/./_app/chunks/_Articles-19418aa8.js">
 		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/index.svelte-799a480d.css">
 
 		<script type="module">
-			import { start } from "/./_app/start-3233a53f.js";
+			import { start } from "/./_app/start-c87ae788.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":"/."},
@@ -57,12 +58,13 @@
 				host: location.host,
 				route: true,
 				spa: false,
+				trailing_slash: "never",
 				hydrate: {
 					status: 200,
 					error: null,
 					nodes: [
-						import("/./_app/pages/$layout.svelte-5fc7026e.js"),
-						import("/./_app/pages/index.svelte-9b8467dc.js")
+						import("/./_app/pages/__layout.svelte-7124b4cc.js"),
+						import("/./_app/pages/index.svelte-a860262a.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -79,17 +81,18 @@
 
 
 
-<h1><img src="images/tnzkreal01.png" alt="my profile" width="64">
-  <img src="images/tnzk.png" alt="my avatar" width="64">
+<h1><img src="images/tnzkreal02.jpg" alt="my profile" class="rounded svelte-ggshsd">
+  <img src="images/tnzkreal01.png" alt="my profile" class="rounded svelte-ggshsd">
+  <img src="images/tnzk.png" alt="my avatar" class="rounded svelte-ggshsd">
   Kyohei Hamaguchi (濱口 恭平) / @tnzk
 </h1>
 <p>システム開発会社社長・プログラミングスクール運営会社CTO・他役員や技術顧問等 / 1990年生まれ。鳥羽商船高専制御情報工学科→筑波大情報科学類→仮想化テック系ベンチャーCTO→フリーランス→開発会社＋スクール運営 / 全日本剣道連盟居合道三段・無雙直伝英信流土佐大田派初段 / 5歳児のパパ</p>
-<p>C++/.NET/nasmを使ってソフトウェアドライバの開発などをしていたので、ローレイヤに割と強いです。Web系の開発はRuby/Rails, PHP, Node, SSGなど幅広くやっています。画像認識系もときどきやります。PyTorchを使います。</p>
-<p>最近はエンジニア組織のチームビルディングや、PdM・PMをやることが多いです。事業ドメインと成長段階に合わせて&quot;ちょうどよく&quot;スケールしていける（ソフトウェア|人的）システムを作ることが得意です。</p>
+<p>C++/.NET/nasmを使ってソフトウェアドライバの開発などをしていたので、ローレイヤに割と強いです。Web系の開発はRailsが中心ですが、最近はReactとSvelteに切り替えつつあります。画像認識系もときどきやります。PyTorchを使います。</p>
+<p>最近はエンジニア組織のチームビルディングや、PdM・PMをやることが多いです。アジャイル・テスト駆動開発やATDDなどの手法を軸にしつつ、事業ドメインと事業の成長段階に合わせて&quot;ちょうどよく&quot;スケールしていけるシステム（ソフトウェア &amp; 人的）を作ることが得意です。</p>
 <p>Twitter:
-  <a href="https://twitter.com/tnzk" target="_blank">@tnzk</a>
+  <a href="https://twitter.com/hmgchk" target="_blank">@hmgchk</a>
    / 
-  <a href="https://twitter.com/hmgchk" target="_blank">@hmgchk</a></p>
+  <a href="https://twitter.com/tnzk" target="_blank">@tnzk</a></p>
 <section><h2>現在</h2>
   <ul><li><a href="https://mosqiiit.co.jp/" target="_blank">株式会社MOSQIIIT</a>（JS特化のプログラミング教室Code Village運営） 取締役CTO 2019年11月〜現在</li>
     <li><a href="https://www.zumen.co.jp" target="_blank">株式会社ZUMEN</a>（建設×AIベンチャー） 創業者, 取締役CTO 2019年7月〜現在</li>
@@ -107,12 +110,12 @@
     <li>一次創作者向けMastodonサーバー ichiji.social 運営 (<a rel="me" href="https://ichiji.social/@tnzk" target="_blank">tnzk@ichiji.social</a>)</li></ul></section>
 
 <section><h2>記事</h2>
-  <ul><li>2021-05-04 <a href="/t/2021-05-04-bdd-timeline">TDD, BDD, ATDD and Agile timeline</a></li><li>2020-05-31 <a href="/t/2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api">Trying openapi2aspida to auto-generate Type Definition for a Web API </a></li><li>2020-05-14 <a href="/t/2020-05-14-making-web-apis-type-safe-with-aspida">Making Web APIs Type-safe with Aspida </a></li></ul></section>
+  <ul><li>2021-06-10 <a href="/t/2021-06-10-puppeteer-on-m1-mac">Install Puppeteer on MacBook Pro with Apple Silicon / M1</a></li><li>2021-05-04 <a href="/t/2021-05-04-bdd-timeline">TDD, BDD, ATDD and Agile timeline</a></li><li>2020-05-31 <a href="/t/2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api">Trying openapi2aspida to auto-generate Type Definition for a Web API </a></li><li>2020-05-14 <a href="/t/2020-05-14-making-web-apis-type-safe-with-aspida">Making Web APIs Type-safe with Aspida </a></li></ul></section>
 <footer>Kyohei Hamaguchi (tnzk) © 2010-2020</footer>
 
 
 
-	<script type="svelte-data" url="t.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"articles\":[{\"slug\":\"2021-05-04-bdd-timeline\",\"createdAt\":\"2021-05-04\",\"title\":\"TDD, BDD, ATDD and Agile timeline\"},{\"slug\":\"2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api\",\"createdAt\":\"2020-05-31\",\"title\":\"Trying openapi2aspida to auto-generate Type Definition for a Web API \"},{\"slug\":\"2020-05-14-making-web-apis-type-safe-with-aspida\",\"createdAt\":\"2020-05-14\",\"title\":\"Making Web APIs Type-safe with Aspida \"}]}"}</script>
+	<script type="svelte-data" url="t.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"articles\":[{\"slug\":\"2021-06-10-puppeteer-on-m1-mac\",\"createdAt\":\"2021-06-10\",\"title\":\"Install Puppeteer on MacBook Pro with Apple Silicon \u002F M1\"},{\"slug\":\"2021-05-04-bdd-timeline\",\"createdAt\":\"2021-05-04\",\"title\":\"TDD, BDD, ATDD and Agile timeline\"},{\"slug\":\"2020-05-31-trying-openapi2aspida-to-auto-generate-type-definition-for-a-web-api\",\"createdAt\":\"2020-05-31\",\"title\":\"Trying openapi2aspida to auto-generate Type Definition for a Web API \"},{\"slug\":\"2020-05-14-making-web-apis-type-safe-with-aspida\",\"createdAt\":\"2020-05-14\",\"title\":\"Making Web APIs Type-safe with Aspida \"}]}"}</script>
 </div>
 	</body>
 </html>

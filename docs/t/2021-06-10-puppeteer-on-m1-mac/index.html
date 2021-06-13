@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Kyohei Hamaguchi （濱口恭平） / @tnzk</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-3063979-4" data-svelte="svelte-17kmz97"></script><script data-svelte="svelte-17kmz97">window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-3063979-4');
+  </script><meta charset="utf-8" data-svelte="svelte-17kmz97"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" data-svelte="svelte-17kmz97"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-17kmz97"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" data-svelte="svelte-17kmz97"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" data-svelte="svelte-17kmz97"><link rel="manifest" href="/site.webmanifest" data-svelte="svelte-17kmz97"><style data-svelte="svelte-17kmz97">@font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Medium");
+  }
+  @font-face {
+    font-family: "Yu Gothic M";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+  }
+  body {
+    margin: 0;
+    border-top: 5px #0F4C81 solid;
+    padding: 1em;
+    line-height: 1.6em;
+    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, "游ゴシック体", YuGothic, "Yu Gothic M", "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", HiraKakuProN-W3, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  h1,
+  h2 {
+    color: #0F4C81;
+  }
+  h1>img {
+    vertical-align: middle;
+  }
+  footer {
+    font-size: smaller;
+    color: #555;
+  }
+  </style>
+
+		
+
+		<link rel="modulepreload" href="/./_app/start-c87ae788.js">
+		<link rel="modulepreload" href="/./_app/chunks/vendor-c6d05778.js">
+		<link rel="modulepreload" href="/./_app/pages/__layout.svelte-7124b4cc.js">
+		<link rel="modulepreload" href="/./_app/pages/t/[slug].svelte-2d927b40.js">
+		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/t/[slug].svelte-8a534da5.css">
+
+		<script type="module">
+			import { start } from "/./_app/start-c87ae788.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":"/."},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/./_app/pages/__layout.svelte-7124b4cc.js"),
+						import("/./_app/pages/t/[slug].svelte-2d927b40.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/t/2021-06-10-puppeteer-on-m1-mac",
+						query: new URLSearchParams(""),
+						params: {"slug":"2021-06-10-puppeteer-on-m1-mac"}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+
+<a href="/t">記事一覧</a>
+
+<h1>Install Puppeteer on MacBook Pro with Apple Silicon / M1</h1>
+
+
+    <a href="#/">en</a> | 
+    <a href="#/">ja</a>
+
+<p class="availableAt svelte-1wkh1tu">This document is available at:
+    <a href="https://dev.to/tnzk/install-puppeteer-on-macbook-pro-with-apple-silicon-m1-3kc" target="_blank">https://dev.to/tnzk/install-puppeteer-on-macbook-pro-with-apple-silicon-m1-3kc</a></p>
+
+<p>For those who wouldn't like to work outside the CLI.</p>
+<p>Install Chromium via brew:</p>
+<pre><code class="language-zsh">$ brew install chromium
+$ `which chromium`
+</code></pre>
+<p>Set an environemntal variable to prevent <code>[npm/yarn/pnpm] install</code> downloading Chromium automatically (I'd put <code>.env</code> into the repo so coworkers with Apple Silicon can <code>$ source .env</code> .)</p>
+<pre><code class="language-zsh:.env">export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+</code></pre>
+<p>Although <a href="https://github.com/puppeteer/puppeteer/issues/6622#issuecomment-788199984">in some situations you need to patch Puppeteer</a> since it has a hard-coded executable path to <code>/usr/bin/chromium-browser</code>, you can try an option of <code>puppeteer.launch</code> to overwrite it.</p>
+<pre><code class="language-js">const browser = await puppeteer.launch({
+    executablePath: process.env[‘PUPPETEER_EXECUTABLE_PATH’],
+})
+</code></pre>
+<h1>参考</h1>
+<ul>
+<li><a href="https://github.com/puppeteer/puppeteer/issues/6622">Installation fails on Apple Silicon / M1</a></li>
+<li><a href="https://qiita.com/3tomcha/items/f141faa1cb24124e9d66">M1 MacBookでpuppeteerが動かない時の解決策</a></li>
+<li><a href="https://qiita.com/Buzzword111/items/aa5dd4c89358a63f970a">M1 Macでpuppeteerを動かす方法（2020年12月21日時点）</a></li>
+</ul>
+
+<footer>Kyohei Hamaguchi (tnzk) © 2010-2020</footer>
+
+
+
+	<script type="svelte-data" url="2021-06-10-puppeteer-on-m1-mac.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"en\":{\"title\":\"Install Puppeteer on MacBook Pro with Apple Silicon \u002F M1\",\"distro\":\"https:\u002F\u002Fdev.to\u002Ftnzk\u002Finstall-puppeteer-on-macbook-pro-with-apple-silicon-m1-3kc\",\"body\":\"\u003Cp\u003EFor those who wouldn't like to work outside the CLI.\u003C\u002Fp\u003E\\n\u003Cp\u003EInstall Chromium via brew:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-zsh\\\"\u003E$ brew install chromium\\n$ `which chromium`\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003ESet an environemntal variable to prevent \u003Ccode\u003E[npm\u002Fyarn\u002Fpnpm] install\u003C\u002Fcode\u003E downloading Chromium automatically (I'd put \u003Ccode\u003E.env\u003C\u002Fcode\u003E into the repo so coworkers with Apple Silicon can \u003Ccode\u003E$ source .env\u003C\u002Fcode\u003E .)\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-zsh:.env\\\"\u003Eexport PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true\\nexport PUPPETEER_EXECUTABLE_PATH=`which chromium`\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EAlthough \u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Fpuppeteer\u002Fpuppeteer\u002Fissues\u002F6622#issuecomment-788199984\\\"\u003Ein some situations you need to patch Puppeteer\u003C\u002Fa\u003E since it has a hard-coded executable path to \u003Ccode\u003E\u002Fusr\u002Fbin\u002Fchromium-browser\u003C\u002Fcode\u003E, you can try an option of \u003Ccode\u003Epuppeteer.launch\u003C\u002Fcode\u003E to overwrite it.\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-js\\\"\u003Econst browser = await puppeteer.launch({\\n    executablePath: process.env[‘PUPPETEER_EXECUTABLE_PATH’],\\n})\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Ch1\u003E参考\u003C\u002Fh1\u003E\\n\u003Cul\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Fpuppeteer\u002Fpuppeteer\u002Fissues\u002F6622\\\"\u003EInstallation fails on Apple Silicon \u002F M1\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fqiita.com\u002F3tomcha\u002Fitems\u002Ff141faa1cb24124e9d66\\\"\u003EM1 MacBookでpuppeteerが動かない時の解決策\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fqiita.com\u002FBuzzword111\u002Fitems\u002Faa5dd4c89358a63f970a\\\"\u003EM1 Macでpuppeteerを動かす方法（2020年12月21日時点）\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003C\u002Ful\u003E\\n\"},\"ja\":{\"title\":\"Apple Silicon \u002F M1 で Puppeteer のインストールに失敗する場合\",\"distro\":\"https:\u002F\u002Fzenn.dev\u002Ftnzk\u002Farticles\u002Fa99b246faf5f69\",\"body\":\"\u003Cp\u003Eなるべくコマンドライン以外の作業をしたくない人向け:\u003C\u002Fp\u003E\\n\u003Cp\u003Ebrew で Chromium をインストール:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-zsh\\\"\u003E$ brew install chromium\\n$ `which chromium`\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003E\u003Ccode\u003E[npm\u002Fyarn\u002Fpnpm] install\u003C\u002Fcode\u003E で Chromium の自動ダウンロードが始まらないように環境変数を設定しておく（個人的には \u003Ccode\u003E.env\u003C\u002Fcode\u003E に書いといて M1の人だけ \u003Ccode\u003E$ source .env\u003C\u002Fcode\u003E する運用が楽だなと思います）:\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-zsh:.env\\\"\u003Eexport PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true\\nexport PUPPETEER_EXECUTABLE_PATH=`which chromium`\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Cp\u003EPuppeteer には \u003Ccode\u003E\u002Fusr\u002Fbin\u002Fchromium-browser\u003C\u002Fcode\u003E がベタ書きされていて\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Fpuppeteer\u002Fpuppeteer\u002Fissues\u002F6622#issuecomment-788199984\\\"\u003Eパッチを当てなきゃいけないみたいな話\u003C\u002Fa\u003Eもあるのだが、実際は \u003Ccode\u003Epuppeteer.launch\u003C\u002Fcode\u003E のオプションで実行時に指定できる。何らかのフレームワークが Puppeteer を隠蔽しきっていてこのオプションを触れないとかでなければこっちのほうが楽。\u003C\u002Fp\u003E\\n\u003Cpre\u003E\u003Ccode class=\\\"language-js\\\"\u003Econst browser = await puppeteer.launch({\\n    executablePath: process.env[‘PUPPETEER_EXECUTABLE_PATH’],\\n})\\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\\n\u003Ch1\u003E参考\u003C\u002Fh1\u003E\\n\u003Cul\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fgithub.com\u002Fpuppeteer\u002Fpuppeteer\u002Fissues\u002F6622\\\"\u003EInstallation fails on Apple Silicon \u002F M1\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fqiita.com\u002F3tomcha\u002Fitems\u002Ff141faa1cb24124e9d66\\\"\u003EM1 MacBookでpuppeteerが動かない時の解決策\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003Cli\u003E\u003Ca href=\\\"https:\u002F\u002Fqiita.com\u002FBuzzword111\u002Fitems\u002Faa5dd4c89358a63f970a\\\"\u003EM1 Macでpuppeteerを動かす方法（2020年12月21日時点）\u003C\u002Fa\u003E\u003C\u002Fli\u003E\\n\u003C\u002Ful\u003E\\n\"}}"}</script>
+</div>
+	</body>
+</html>
