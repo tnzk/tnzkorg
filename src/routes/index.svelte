@@ -11,19 +11,29 @@
   export let articles;
 </script>
 
+<style>
+img.rounded {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+</style>
+
 <h1>
-  <img src="images/tnzkreal01.png" alt="my profile" width="64">
-  <img src="images/tnzk.png" alt="my avatar" width="64">
+  <img src="images/tnzkreal02.jpg" alt="my profile" class="rounded">
+  <img src="images/tnzkreal01.png" alt="my profile" class="rounded">
+  <img src="images/tnzk.png" alt="my avatar" class="rounded">
   Kyohei Hamaguchi (濱口 恭平) / &commat;tnzk
 </h1>
 <p>システム開発会社社長・プログラミングスクール運営会社CTO・他役員や技術顧問等 / 1990年生まれ。鳥羽商船高専制御情報工学科→筑波大情報科学類→仮想化テック系ベンチャーCTO→フリーランス→開発会社＋スクール運営 / 全日本剣道連盟居合道三段・無雙直伝英信流土佐大田派初段 / 5歳児のパパ</p>
-<p>C++/.NET/nasmを使ってソフトウェアドライバの開発などをしていたので、ローレイヤに割と強いです。Web系の開発はRuby/Rails, PHP, Node, SSGなど幅広くやっています。画像認識系もときどきやります。PyTorchを使います。</p>
-<p>最近はエンジニア組織のチームビルディングや、PdM・PMをやることが多いです。事業ドメインと成長段階に合わせて&quot;ちょうどよく&quot;スケールしていける（ソフトウェア|人的）システムを作ることが得意です。</p>
+<p>C++/.NET/nasmを使ってソフトウェアドライバの開発などをしていたので、ローレイヤに割と強いです。Web系の開発はRailsが中心ですが、最近はReactとSvelteに切り替えつつあります。画像認識系もときどきやります。PyTorchを使います。</p>
+<p>最近はエンジニア組織のチームビルディングや、PdM・PMをやることが多いです。アジャイル・テスト駆動開発やATDDなどの手法を軸にしつつ、事業ドメインと事業の成長段階に合わせて&quot;ちょうどよく&quot;スケールしていけるシステム（ソフトウェア &amp; 人的）を作ることが得意です。</p>
 <p>
   Twitter:
-  <a href="https://twitter.com/tnzk" target="_blank">@tnzk</a>
-  &nbsp;/&nbsp;
   <a href="https://twitter.com/hmgchk" target="_blank">@hmgchk</a>
+  &nbsp;/&nbsp;
+  <a href="https://twitter.com/tnzk" target="_blank">@tnzk</a>
 </p>
 <section>
   <h2>現在</h2>
