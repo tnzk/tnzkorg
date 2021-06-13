@@ -38,3 +38,4 @@ Any infomation and advices would be appreciated, especially events since 2014 wh
 - [Test Driven Development:By Example](https://amzn.to/3uiVvUj) and [its Japanese translation](https://www.amazon.co.jp/dp/4274217884/ref=cm_sw_r_cp_awdb_imm_T4K57RQDWVDKEVFT23MQ)
 - [Clean Agile](https://www.amazon.co.jp/dp/0135781868/ref=cm_sw_r_cp_awdb_imm_SM7Y3PXXN2W9S2342NP1)
 - [Why I recommend against using Cucumber](https://www.codewithjason.com/recommend-against-cucumber/)
+- [History of RSpec](https://www.stevenrbaker.com/tech/history-of-rspec.html)
