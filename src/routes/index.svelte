@@ -38,8 +38,8 @@ img.rounded {
 <section>
   <h2>現在</h2>
   <ul>
-    <li><a href="https://mosqiiit.co.jp/" target="_blank">株式会社MOSQIIIT</a>（JS特化のプログラミング教室Code Village運営） 取締役CTO 2019年11月〜現在</li>
-    <li><a href="https://www.zumen.co.jp" target="_blank">株式会社ZUMEN</a>（建設×AIベンチャー） 創業者, 取締役CTO 2019年7月〜現在</li>
+    <li><a href="https://mosqiiit.co.jp/" target="_blank">株式会社MOSQIIIT</a>（プログラミングスクールCode Village運営） 取締役CTO 2019年11月〜現在</li>
+    <li><a href="https://www.zumen.co.jp" target="_blank">株式会社ZUMEN</a>（建設×AIベンチャー） 共同創業者, 取締役CTO 2019年7月〜現在</li>
     <li><a href="https://www.5thfloor.co.jp" target="_blank">フィフス・フロア株式会社</a>（受託開発、同人業界向けwebサービス） 創業者, 代表取締役CEO 2015年2月〜現在</li>
     <li><a href="http://magia.co.jp" target="_blank">株式会社MAGIA</a>（YouTube動画制作・チャンネル運用、版権管理） 取締役CTO 2014年〜現在</li>
   </ul>
@@ -48,7 +48,7 @@ img.rounded {
   <h2>略歴</h2>
   <ul>
     <li><a href="https://www.finplanet.co.jp/" target="_blank">株式会社フィンプラネット</a> CTO 2018年6月〜2018年9月</li>
-    <li><a href="https://syginc.jp/" target="_blank">株式会社Synclogue(現: 株式会社SYG)</a> Co-Founder, 取締役CTO 2012年〜2014年</li>
+    <li><a href="https://syginc.jp/" target="_blank">株式会社Synclogue(現: 株式会社SYG)</a> 共同創業者, 取締役CTO 2012年〜2014年</li>
   </ul>
 </section>
 <section>
@@ -62,16 +62,14 @@ img.rounded {
     <li>一次創作者向けMastodonサーバー ichiji.social 運営 (<a rel="me" href="https://ichiji.social/@tnzk" target="_blank">tnzk@ichiji.social</a>)</li>
   </ul>
 </section>
-<!--
 <section>
   <h2>メディア掲載・出演</h2>
   <ul>
     <li><a href="https://magazine.techcareer.jp/interview/tonarino_cto/13041/" target="_blank">techcareer magazine 『突撃！隣のCTO 社会に役立つプロジェクトを「テクノロジー」というツールで仕掛け続けたい　株式会社MOSQIIIT・CTO濱口恭平さん』</a></li>
-    <li><a href="https://youtu.be/JaUKNVPKiwI" target="_blank">MOSQIIITチャンネル『プログラミング言語って何なの！？特性や違いを徹底解説！』</a></li>
+    <!-- <li><a href="https://youtu.be/JaUKNVPKiwI" target="_blank">MOSQIIITチャンネル『プログラミング言語って何なの！？特性や違いを徹底解説！』</a></li> -->
     <li><a href="https://www.youtube.com/playlist?list=PLj3WcbSxSR5VYMla_prQzFz0F3MmPy9ZD" target="_blank">BIM CHANNEL 『ダイナモを学ぶ』</a></li>
   </ul>
 </section>
--->
 <section>
   <h2>記事</h2>
   <Articles {articles} />
