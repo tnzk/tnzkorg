@@ -12,18 +12,27 @@
 </script>
 
 <style>
-img.rounded {
-  object-fit: cover;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-}
+  .photos {
+    max-width: 50%;
+  }
+  img.rounded {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 30%;
+    max-width: 100px;
+    max-height: 100px;
+  }
+  h1 {
+    line-height: 1.5em;
+  }
 </style>
 
 <h1>
-  <img src="images/tnzkreal02.jpg" alt="my profile" class="rounded">
-  <img src="images/tnzkreal01.png" alt="my profile" class="rounded">
-  <img src="images/tnzk.png" alt="my avatar" class="rounded">
+  <div class="photos">
+    <img src="images/tnzkreal02.jpg" alt="my profile" class="rounded">
+   <img src="images/tnzkreal01.png" alt="my profile" class="rounded">
+    <img src="images/tnzk.png" alt="my avatar" class="rounded">
+  </div>
   Kyohei Hamaguchi (濱口 恭平) / &commat;tnzk
 </h1>
 <p>システム開発会社社長・プログラミングスクール運営会社CTO・他役員や技術顧問等 / 1990年生まれ。鳥羽商船高専制御情報工学科→筑波大情報科学類→仮想化テック系ベンチャーCTO→フリーランス→開発会社＋スクール運営 / 全日本剣道連盟居合道三段・無雙直伝英信流土佐大田派初段 / 5歳児のパパ</p>
