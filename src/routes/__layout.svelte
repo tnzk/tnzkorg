@@ -49,4 +49,4 @@
   </style>
 </svelte:head>
 <slot></slot>
-<footer>Kyohei Hamaguchi (tnzk) &copy; 2010-{(new Date().getFullYear()}</footer>
+<footer>Kyohei Hamaguchi (tnzk) &copy; 2010-{(new Date()).getFullYear()}</footer>
